@@ -1,8 +1,13 @@
-
 # El proyecto de PSP de Mykyta Ryasny
 El proyecto consistira de una aplicación de movil que mediante NFC (Near-field communication)
 realizará diferentes acciones en el dispositivo móvil y a su vez guardará datos relevantes 
 en una base de datos.
+
+## Planing
+- Familiarizarme con el modelo VMMV de AndroidStudio (26-01-2023)
+- Familiarizarme con Docker y montar el servidor Java. (30-01-2023)
+- Crear una aplicacion-cliente basica para comprobar la comunicación con el servidor (30-01-2023)
+- Crear el primer diseño de Android para ir implementando la comunicación cliente-servidor (30-01-2023)
 
 
 ## Objetivos
