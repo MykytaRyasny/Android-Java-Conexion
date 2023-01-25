@@ -4,10 +4,11 @@ realizará diferentes acciones en el dispositivo móvil y a su vez guardará dat
 en una base de datos.
 
 ## Planing
-- Familiarizarme con el modelo VMMV de AndroidStudio (26-01-2023)
-- Familiarizarme con Docker y montar el servidor Java. (30-01-2023)
-- Crear una aplicacion-cliente basica para comprobar la comunicación con el servidor (30-01-2023)
-- Crear el primer diseño de Android para ir implementando la comunicación cliente-servidor (30-01-2023)
+- [ ] Familiarizarme con el modelo VMMV de AndroidStudio (26-01-2023)
+- [x] Instalar una maquina virtual con Linux para que me sirva de Servidor (26-01-2023)
+  - He instalado Linux 22.04 Desktop para tener una interfaz y tener mayor comodidad a la hora de testear, la optimización de recursos no es necesaria en este momento
+- [ ] Crear una aplicacion-cliente basica para comprobar la comunicación con el servidor (30-01-2023)
+- [ ] Crear el primer diseño de Android para ir implementando la comunicación cliente-servidor (30-01-2023)
 
 
 ## Objetivos
