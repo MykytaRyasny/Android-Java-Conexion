@@ -3,11 +3,17 @@ package com.example.iotproyect
 import java.io.*
 import java.net.*
 
+// Clase con metodos para conectarse y desconectarse del servidor
 class Conexion {
-    public fun conectar() {
+
+    private lateinit var socket: Socket
+
+    // Metodo conectar para conectar al servidor
+    fun conectar() {
+        // Conectarse al servidor en la dirección IP "localhost" o la IP del servidor o la maquina donde se aloje el server y puerto 5000
+        // TODO, en vez de conectarse automatico, poner la IP
+        socket = Socket("192.168.100.184", 5000)
         try {
-            // Conectarse al servidor en la dirección IP "localhost" y puerto 5000
-            val socket = Socket("192.168.100.24", 5000)
             println("Conectado al servidor")
 
             // Crear flujos de entrada y salida
@@ -15,6 +21,7 @@ class Conexion {
             val input = ObjectInputStream(socket.getInputStream())
 
             // Enviar un mensaje al servidor
+            // TODO mandar usuario y contraseña
             val message = "Hola Servidor"
             output.writeObject(message)
             output.flush()
@@ -23,12 +30,18 @@ class Conexion {
             // Recibir la respuesta del servidor
             val response = input.readObject() as String
             println("Respuesta recibida del servidor: $response")
-
-            // Cerrar la conexión
-            socket.close()
-            println("Conexión cerrada")
         } catch (e: IOException) {
             e.printStackTrace()
+        }
+    }
+
+    // Metodo para cerrar la conexion, siempre y cuando primero se haya establecido
+    fun desconectar() {
+        if (::socket.isInitialized) {
+            socket.close()
+            println("Conexión cerrada")
+        } else {
+            println("No se ha establecido conexión")
         }
     }
 }
