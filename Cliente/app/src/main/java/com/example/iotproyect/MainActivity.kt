@@ -17,8 +17,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
-    // Instancio la clase para poder usar la conexión
-    val con = Conexion()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -30,12 +28,6 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
-
-        // TODO implementacion completa del login
-        Thread() {
-            con.conectar()
-            con.desconectar()
-        }.start()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -1,18 +1,19 @@
 package com.example.iotproyect
 
+import org.mindrot.jbcrypt.BCrypt;
 import java.io.*
 import java.net.*
 
 // Clase con metodos para conectarse y desconectarse del servidor
-class Conexion {
+class Conexion(private var username:String, private var password:String) {
 
     private lateinit var socket: Socket
 
     // Metodo conectar para conectar al servidor
-    fun conectar() {
+    fun login() {
         // Conectarse al servidor en la dirección IP "localhost" o la IP del servidor o la maquina donde se aloje el server y puerto 5000
-        // TODO, en vez de conectarse automatico, poner la IP
-        socket = Socket("192.168.100.184", 5000)
+        // TODO en vez de conectarse automatico, poner la IP???
+        socket = Socket("192.168.100.254", 5000)
         try {
             println("Conectado al servidor")
 
@@ -20,9 +21,9 @@ class Conexion {
             val output = ObjectOutputStream(socket.getOutputStream())
             val input = ObjectInputStream(socket.getInputStream())
 
-            // Enviar un mensaje al servidor
-            // TODO mandar usuario y contraseña
-            val message = "Hola Servidor"
+            // Mandamos nombre de usuario y contraseña al servidor
+            val encryptedPassword = BCrypt.hashpw(password, BCrypt.gensalt(12))
+            val message = "$username:$encryptedPassword"
             output.writeObject(message)
             output.flush()
             println("Mensaje enviado al servidor: $message")
