@@ -4,7 +4,10 @@ realizará diferentes acciones en el dispositivo móvil y a su vez guardará dat
 en una base de datos.
 
 ## Planing
-- [ ] Familiarizarme con el modelo VMMV de AndroidStudio (26-01-2023)
+- [x] Impllementacio inciial de hilos
+- [x] Almcenamiento local de la semilla de encriptacion
+- [x] Implementados hilos en el servidor para los metodos login y register
+- [x] Familiarizarme con el modelo VMMV de AndroidStudio (26-01-2023)
 - [x] Instalar una maquina virtual con Linux para que me sirva de Servidor (26-01-2023)
   - He instalado Linux 22.04 Desktop para tener una interfaz y tener mayor comodidad a la hora de testear, la optimización de recursos no es necesaria en este momento
 - [x] Crear una aplicacion-cliente basica para comprobar la comunicación con el servidor (30-01-2023)
@@ -14,9 +17,9 @@ en una base de datos.
 
 
 ## Objetivos
-- Crear una aplicacion en AndroidStudio que ejecute diversos metodos mediante API de NFC
+- Crear una aplicacion en AndroidStudio que ejecute diversos metodos en el servidor
 - Crear una aplicacion Java (Server) que este a la escucha constantemete
-- Almacenar datos del movil que se conecta via NFC
+- Almacenar datos del movil en el servidor entre ellos base de datos de login
 
 ### Extras
 - Implementar otras funciones relacionados con BBDD o con el server en si como

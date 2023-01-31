@@ -1,14 +1,14 @@
-import org.mindrot.jbcrypt.BCrypt;
+import BBDD.Login;
+import BBDD.Register;
+import BBDD.User;
 
 import java.io.*;
 import java.net.*;
-import java.sql.*;
 
 public class Main {
     // Crear un socket en el puerto 5000
     public static void main(String[] args) {
         try (ServerSocket serverSocket = new ServerSocket(5000)) {
-            User u = new User();
             System.out.println("Servidor iniciado en el puerto 5000");
 
             while (true) {
@@ -26,14 +26,16 @@ public class Main {
                 // Determinar si el usuario se registra o inicia la sesión
                 // Procesar el mensaje con la base de datos que tenemos
                 if (datos.startsWith("register:")) {
-                    u.register(datos);
+                    Register r = new Register(datos);
+                    r.start();
                 } else {
-                    u.login(datos);
+                    Login l = new Login(datos);
+                    l.start();
                 }
 
                 // Enviar la respuesta al cliente
                 // TODO implemetar un token
-                output.writeObject("a");
+                output.writeObject("");
                 output.flush();
                 System.out.println("Respuesta enviada al cliente: ");
             }

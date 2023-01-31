@@ -17,4 +17,6 @@
     <string name="aceptar">Aceptar</string>
     <string name="repeat_password">Repeat Password</string>
     <string name="password_mismatch">Las contraseñas no coinciden</string>
+    <string name="ip_mismatch">Introduzca una IP correcta</string>
+    <string name="ip">ip</string>
 </resources>
