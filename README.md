@@ -1,7 +1,22 @@
+# Como usar el proyecto
+## Compilado
+- Para usar el proyecto compilado hay que descargar la apk e instalarlo en un movil
+- Descargar el servidor en un dispositivo que tenga java 1.8 o superior
+- Ejecutar el servidor con comando:
+  <br />
+  `java -jar Server.jar`
+- tener el archivo de la base de datos en el mismo directorio que el servidor
+- Tanto el servidor como el dispositivo movil tiene que estar en la misma red
+  Ya puedes registrarte y loguearte
+
+## Sin compilar
+- Necesitas AndroidStudio y Cualquier IDE a elección (Eclipse, VSCode, IntelliJ)
+- Java 1.8 o superior
+- Correr el servidor ejecutando el main de Java
+- Correr la APK con el emulador que trae AndroidStudio
+- En caso de que no quieras tener una maquina virtual, puedes ejecutarlo en el mismo dispositivo para eso en la app de Android Studio tendras que poner como IP 127.0.0.1 o la ip local que uses en caso de cambiarla
 # El proyecto de PSP de Mykyta Ryasny
-El proyecto consistira de una aplicación de movil que mediante NFC (Near-field communication)
-realizará diferentes acciones en el dispositivo móvil y a su vez guardará datos relevantes 
-en una base de datos.
+El proyecto consiste en una aplicacion cliente servidor que inician el contacto emdiante login-register y posteriormente interactuan para realizar diversas tareas
 
 ## Planing
 - [x] Impllementacio inciial de hilos
@@ -34,6 +49,8 @@ En esta fase del proyecto el proyecto dispone de los siguientes metodos en el Se
 ## UML
 Se irá implementando la relación entre diferentes métodos y la interacción completa a su vez
 el funcionamiento completo de los métodos
+Ejempolo de funcionamiento de login:
+[!UML del login](Ejemplo%20de%20login.drawio.jpg)
 ## Herramientas de desarrollo
 - Java 1.9
 - Kotlin
