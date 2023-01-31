@@ -10,40 +10,28 @@
         android:id="@+id/et_Name"
         android:layout_width="250dp"
         android:layout_height="50dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="170dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/nombre"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints="" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/et_Nickname"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginTop="24dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/nickname"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_Name"
-        android:autofillHints=""/>
+        app:layout_constraintTop_toBottomOf="@+id/et_Name" />
 
-
-    <Button
-        android:id="@+id/bt_Aceptar"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="100dp"
-        android:text="@string/aceptar"
-        app:layout_constraintEnd_toEndOf="@+id/et_Password"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_Password" />
 
     <Button
         android:id="@+id/bt_Cancelar"
@@ -54,19 +42,46 @@
         android:layout_marginEnd="24dp"
         android:text="@android:string/cancel"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="@+id/et_Password"
-        app:layout_constraintTop_toBottomOf="@+id/et_Password" />
+        app:layout_constraintTop_toBottomOf="@+id/et_repeatPassword" />
+
+    <Button
+        android:id="@+id/bt_Aceptar"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="100dp"
+        android:text="@string/aceptar"
+        app:layout_constraintEnd_toEndOf="@+id/et_Password"
+        app:layout_constraintHorizontal_bias="0.561"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_repeatPassword" />
 
     <EditText
         android:id="@+id/et_Password"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_marginTop="24dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_Nickname"
-        android:autofillHints=""/>
+        app:layout_constraintTop_toBottomOf="@+id/et_Nickname" />
+
+    <EditText
+        android:id="@+id/et_repeatPassword"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="@string/repeat_password"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_Password"
+        android:autofillHints="" />
 </androidx.constraintlayout.widget.ConstraintLayout>

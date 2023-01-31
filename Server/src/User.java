@@ -1,18 +1,26 @@
-import java.sql.*;
 import org.mindrot.jbcrypt.BCrypt;
+
+import java.sql.*;
 
 public class User {
     private String nickname;
     private String name;
     private String password;
 
-    public User(String nickname, String name, String password) {
-        this.nickname = nickname;
+    private User(String name, String nicname, String password) {
         this.name = name;
+        this.nickname = nickname;
         this.password = password;
     }
+    public User(){}
 
-    public void register() {
+    public void register(String message) {
+        // Descomponemos el mensaje para obtener los valores de nickname, name y password
+        String[] parts = message.split(":");
+        this.name = parts[1];
+        this.nickname = parts[2];
+        this.password = parts[3];
+
         Connection conn = null;
         PreparedStatement stmt = null;
         try {
@@ -23,12 +31,12 @@ public class User {
             String hashedPassword = BCrypt.hashpw(this.password, BCrypt.gensalt());
 
             // Step 3: Define a SQL statement
-            String sql = "INSERT INTO users (nickname, name, password) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO users (name, nickname, password) VALUES (?, ?, ?)";
 
             // Step 4: Execute the SQL statement
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1, this.nickname);
-            stmt.setString(2, this.name);
+            stmt.setString(1, this.name);
+            stmt.setString(2, this.nickname);
             stmt.setString(3, hashedPassword);
             stmt.executeUpdate();
 
@@ -45,6 +53,45 @@ public class User {
                 }
             } catch (SQLException e) {
                 System.out.println(e.getMessage());
+            }
+        }
+    }
+    public void login(String datos) {
+        String[] parts = datos.split(":");
+        String username = parts[0];
+        String password = parts[1];
+
+        // Conectarse a la base de datos SQLite
+        Connection connection = null;
+        try {
+            connection = DriverManager.getConnection("jdbc:sqlite:users_db.db");
+
+            // Crear una consulta para obtener los datos del usuario
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE nickname = ?");
+            statement.setString(1, username);
+            ResultSet result = statement.executeQuery();
+
+            // Comprobar si el usuario existe en la base de datos
+            if (result.next()) {
+                String storedPassword = result.getString("password");
+                if (BCrypt.checkpw(password, storedPassword)) {
+                    System.out.println("Usuario autenticado");
+                } else {
+                    System.out.println("Contraseña incorrecta");
+                }
+            } else {
+                System.out.println("Usuario no encontrado");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Error de conexión con la base de datos");
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                // Ignorar
             }
         }
     }

@@ -7,8 +7,10 @@ en una base de datos.
 - [ ] Familiarizarme con el modelo VMMV de AndroidStudio (26-01-2023)
 - [x] Instalar una maquina virtual con Linux para que me sirva de Servidor (26-01-2023)
   - He instalado Linux 22.04 Desktop para tener una interfaz y tener mayor comodidad a la hora de testear, la optimización de recursos no es necesaria en este momento
-- [ ] Crear una aplicacion-cliente basica para comprobar la comunicación con el servidor (30-01-2023)
-- [ ] Crear el primer diseño de Android para ir implementando la comunicación cliente-servidor (30-01-2023)
+- [x] Crear una aplicacion-cliente basica para comprobar la comunicación con el servidor (30-01-2023)
+- [x] Crear el primer diseño de Android para ir implementando la comunicación cliente-servidor (30-01-2023)
+- [x] Implementar una conexión segura. (30-01-2023)
+- [x] Interactuar con una base de datos.
 
 
 ## Objetivos
@@ -23,6 +25,9 @@ en una base de datos.
 ## Modulos
 Aquí se irán poninedo los modulos funcionales o en proceso de desarollo del proyecto para
 su completa implementación
+En esta fase del proyecto el proyecto dispone de los siguientes metodos en el Server:
+- login (se le pasa nombre de usuario y contraseña)
+- register (se le pasa nombre, nombre de usuario y contraseña para almacenar en la base de datos)
 ## UML
 Se irá implementando la relación entre diferentes métodos y la interacción completa a su vez
 el funcionamiento completo de los métodos
@@ -30,7 +35,7 @@ el funcionamiento completo de los métodos
 - Java 1.9
 - Kotlin
 - AndroidStudio
-- Base de Datos (a determinar)
+- Base de Datos (SQLite)
 - Virtual machine (Con Linux para simular un servidor)
 - Maquina anfitriona Windows
 ### Extra:

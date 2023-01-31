@@ -15,4 +15,6 @@
     <string name="entrar">Entrar</string>
     <string name="nombre">Nombre</string>
     <string name="aceptar">Aceptar</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="password_mismatch">Las contraseñas no coinciden</string>
 </resources>

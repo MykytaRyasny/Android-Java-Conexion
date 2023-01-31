@@ -48,9 +48,9 @@ class FirstFragment : Fragment() {
         // usamos el boto de entrar con lambda para mandar el nich y la pass
         bt_entrar = view.findViewById(R.id.bt_enter)
         bt_entrar.setOnClickListener{
-            con = Conexion(et_name.text.toString(), et_password.text.toString())
+            con = Conexion()
             Thread {
-                con.login()
+                con.login(et_name.text.toString(), et_password.text.toString())
             }.start()
         }
     }
