@@ -50,7 +50,7 @@ En esta fase del proyecto el proyecto dispone de los siguientes metodos en el Se
 Se irá implementando la relación entre diferentes métodos y la interacción completa a su vez
 el funcionamiento completo de los métodos
 Ejempolo de funcionamiento de login:
-[![Ejemplo de login](https://i.postimg.cc/N08S3yd9/Ejemplo-de-login-drawio.jpg)](https://postimg.cc/FfRTcK5N)
+[![Ejemplo de login](https://i.postimg.cc/N08S3yd9/Ejemplo-de-login-drawio.jpg)]
 ## Herramientas de desarrollo
 - Java 1.9
 - Kotlin
