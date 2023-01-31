@@ -58,6 +58,7 @@ class SecondFragment : Fragment() {
                 con = Conexion()
                 Thread {
                     con.register(
+                        // TODO recibir respuesa del server ->
                         et_Name.text.toString(),
                         et_Nickname.text.toString(),
                         et_Password.text.toString()

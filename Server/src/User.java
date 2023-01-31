@@ -21,14 +21,13 @@ public class User {
         this.nickname = parts[2];
         this.password = parts[3];
 
+        System.out.println(password);
         Connection conn = null;
         PreparedStatement stmt = null;
         try {
             // Conectamos a la base de datos que se encuentra en el mismo directorio que el servidor
             conn = DriverManager.getConnection("jdbc:sqlite:users_db.db");
 
-            // Step 2: Hash the password
-            String hashedPassword = BCrypt.hashpw(this.password, BCrypt.gensalt());
 
             // Step 3: Define a SQL statement
             String sql = "INSERT INTO users (name, nickname, password) VALUES (?, ?, ?)";
@@ -37,7 +36,7 @@ public class User {
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, this.name);
             stmt.setString(2, this.nickname);
-            stmt.setString(3, hashedPassword);
+            stmt.setString(3, this.password);
             stmt.executeUpdate();
 
         } catch (SQLException e) {

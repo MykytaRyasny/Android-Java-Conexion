@@ -36,7 +36,8 @@ class Conexion() {
     fun register(user:String, username:String, password:String) {
         // Conectarse al servidor en la dirección IP "localhost" o la IP del servidor o la maquina donde se aloje el server y puerto 5000
         // TODO en vez de conectarse automatico, poner la IP???
-        socket = Socket("192.168.100.254", 5000)
+        //socket = Socket("192.168.100.254", 5000)
+        socket = Socket("192.168.146.245", 5000)
         try {
             println("Conectado al servidor")
 
@@ -47,6 +48,7 @@ class Conexion() {
             // Mandamos nombre de usuario y contraseña al servidor
             salt = BCrypt.gensalt(12)
             val encryptedPassword = BCrypt.hashpw(password,salt)
+            println("Salt:" + salt)
             val message = "register:$user:$username:$encryptedPassword"
             println(message)
             output.writeObject(message)
