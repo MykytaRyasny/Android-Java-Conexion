@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class Register extends User implements Runnable {
+public class Register extends User {
     public Register(String message) {
         super(message);
     }
@@ -50,19 +50,5 @@ public class Register extends User implements Runnable {
                 System.out.println(e.getMessage());
             }
         }
-    }
-
-    Thread t;
-
-    public void start() {
-        if (t == null) {
-            t = new Thread(this);
-            t.start();
-        }
-    }
-
-    public void run() {
-        register(this.message);
-        t.interrupt();
     }
 }

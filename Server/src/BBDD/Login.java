@@ -4,7 +4,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.*;
 
-public class Login extends User implements Runnable {
+public class Login extends User {
 
     public Login(String message) {
         super(message);
@@ -12,8 +12,8 @@ public class Login extends User implements Runnable {
 
     public void login(String datos) {
         String[] parts = datos.split(":");
-        String username = parts[0];
-        String password = parts[1];
+        String username = parts[1];
+        String password = parts[2];
 
         // Conectarse a la base de datos SQLite
         Connection connection = null;
@@ -48,19 +48,5 @@ public class Login extends User implements Runnable {
                 // Ignorar
             }
         }
-    }
-
-    Thread t;
-
-    public void start() {
-        if (t == null) {
-            t = new Thread(this);
-            t.start();
-        }
-    }
-
-    public void run() {
-        login(this.message);
-        t.interrupt();
     }
 }
