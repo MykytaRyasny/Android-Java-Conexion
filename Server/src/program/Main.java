@@ -1,15 +1,21 @@
-import socket.MultiConexion;
+package program;
+
+import program.socket.MultiConexion;
 
 import java.io.*;
 import java.net.*;
 
 public class Main {
+
+    public static int numUser = 0;
     public static void main(String[] args) {
         // Crear un socket en el puerto 5000
         try (ServerSocket serverSocket = new ServerSocket(5000)) {
+
             System.out.println("Servidor iniciado en el puerto 5000");
 
             while (true){
+                ++numUser;
                 Socket socket = serverSocket.accept();
                 ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
                 ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());

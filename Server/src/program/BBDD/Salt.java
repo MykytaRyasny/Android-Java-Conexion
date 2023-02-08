@@ -1,7 +1,6 @@
-package BBDD;
+package program.BBDD;
 
 import java.sql.*;
-import java.util.concurrent.CountDownLatch;
 
 public class Salt extends User {
 

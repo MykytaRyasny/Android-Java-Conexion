@@ -1,4 +1,4 @@
-package BBDD;
+package program.BBDD;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -14,6 +14,7 @@ public class Login extends User {
         String[] parts = datos.split(":");
         String username = parts[1];
         String password = parts[2];
+        System.out.println(password);
 
         // Conectarse a la base de datos SQLite
         Connection connection = null;
@@ -27,12 +28,14 @@ public class Login extends User {
 
             // Comprobar si el usuario existe en la base de datos
             if (result.next()) {
+                // Si hay un .next() es que existe y compramos contraseñas
                 String storedPassword = result.getString("password");
                 if (BCrypt.checkpw(password, storedPassword)) {
                     System.out.println("Usuario autenticado");
                 } else {
                     System.out.println("Contraseña incorrecta");
                 }
+            // No existe por que .next() devuelve false
             } else {
                 System.out.println("Usuario no encontrado");
             }

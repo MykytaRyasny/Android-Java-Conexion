@@ -1,4 +1,4 @@
-package BBDD;
+package program.BBDD;
 
 public class User {
     public User ( String message){

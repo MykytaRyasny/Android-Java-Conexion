@@ -1,13 +1,17 @@
-package socket;
+package program.socket;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import BBDD.*;
+import program.BBDD.*;
+import program.Main;
 
 public class MultiConexion implements Runnable {
 
+    // Creamos una variable User a la que posteriormente le asignaremos el numero segun el contador
+    // de usuarios. Que mas que numero de usuario es numero de conexion
+    private int user = Main.numUser;
     // Declaramos las variables que vamos a usar en nuestras conexiones
     private Socket socket;
     // Creamos nuestro input y output con el que nos comunicaremos con el cliente
@@ -32,16 +36,9 @@ public class MultiConexion implements Runnable {
         while (true) {
             try {
                 String mensajeCliente = (String) in.readObject();
-                System.out.println("El mensaje del cliente: " + mensajeCliente);
+                System.out.println("El mensaje del cliente: " + user + " " + mensajeCliente);
                 String[] menu = mensajeCliente.split(":");
                 switch (menu[0]) {
-                    case "hash":
-                        Salt s = new Salt(mensajeCliente);
-                        String salt = s.salt(mensajeCliente);
-                        System.out.println(salt);
-                        out.writeObject(salt);
-                        out.flush();
-                        break;
                     case "register":
                         Register r = new Register(mensajeCliente);
                         r.register(mensajeCliente);

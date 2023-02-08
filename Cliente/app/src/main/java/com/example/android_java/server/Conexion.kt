@@ -28,26 +28,14 @@ class Conexion() {
         println("Nos hemos conectado al servidor")
     }
 
-    // Vamos a obtener el hash de nuestro usuario desde el servidor
-    // Creamos una funcion que devuelve String (salt) como mensaje obtenido del servidor
-    fun obtenerSalt(username: String, ip: String): String {
-        conectar(ip)
-        println("Recuperando el salt")
-        // Creamos flujo de entrda y salida para mandar usuario y recibir hash
-        val message = "hash:$username"
-        output.writeObject(message)
-        output.flush()
-        // TODO borrar
-        return input.readObject() as String
-    }
-
     // Metodo conectar para conectar al servidor
+    // Cuando hacemos login podemos seguir sufriendo el ataque de man in the middle en este diseño
+    // Tendriamos que usar AES para cifrar el envio de datos y descifrarlo en el servidor
+    // Podriamos usar el salt mismo como mensaje para cifrar y descifrar
+    // TODO implementar AES
     suspend fun login(username: String, password: String, ip: String) {
-        salt = obtenerSalt(username, ip)
-        println("Hola")
-        // Mandamos nombre de usuario y contraseña al servidor
-        val encryptedPassword = BCrypt.hashpw(password, salt)
-        val message = "login:$username:$encryptedPassword"
+        conectar(ip)
+        val message = "login:$username:$password"
         println(message)
         //conectar(ip)
         output.writeObject(message)
@@ -55,16 +43,24 @@ class Conexion() {
         println(input.readObject() as String)
     }
 
+    /*fun obtenerSalt(username: String, ip: String): String {
+        conectar(ip)
+        println("Recuperando el salt")
+        // Creamos flujo de entrda y salida para mandar usuario y recibir hash
+        val message = "hash:$username"
+        output.writeObject(message)
+        output.flush()
+        return input.readObject() as String
+    }*/
 
     fun register(user: String, username: String, password: String, ip: String) {
-        // Conectarse al servidor en la dirección IP "localhost" o la IP del servidor o la maquina donde se aloje el server y puerto 5000
-        // Ahora la IP se pasa por el metodo desde un TextBox
         conectar(ip)
         try {
-            println("Conectado al servidor")
+            println("Intentando registrarse")
 
             // Mandamos nombre, nombre de usuario y contraseña al servidor
             var salt = BCrypt.gensalt(12)
+            // Encripto la contraseña para poder guardarla de foram segura en el servidor
             val encryptedPassword = BCrypt.hashpw(password, salt)
             val message = "register:$user:$username:$encryptedPassword"
             output.writeObject(message)
