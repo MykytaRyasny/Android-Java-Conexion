@@ -4,6 +4,7 @@
     <root id="archive" name="Server.jar">
       <element id="module-output" name="Server" />
       <element id="extracted-dir" path="$PROJECT_DIR$/resources/jbcrypt-0.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/resources/bcprov-jdk15on-1.70.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/resources/sqlite-jdbc-3.40.0.0.jar" path-in-jar="/" />
     </root>
   </artifact>

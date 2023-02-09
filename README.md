@@ -19,6 +19,13 @@
 El proyecto consiste en una aplicacion cliente servidor que inician el contacto emdiante login-register y posteriormente interactuan para realizar diversas tareas
 
 ## Planing
+- [x] Rehechos los hilos completamente en el servidor
+- [x] Implementadas corrutinas en Android
+- [x] Implementadas Excepciones personalzadas
+- [x] El servidor devuelve True/False paras las operacioens de login/register
+- [x] Cambiando el sistema de Cifrado a RSA (Clave publcia/Privada)
+- [x] Encriptado manual de la Base de datos con BCrypt 
+Primera entrega
 - [x] Impllementacio inciial de hilos
 - [x] Almcenamiento local de la semilla de encriptacion
 - [x] Implementados hilos en el servidor para los metodos login y register
@@ -49,8 +56,8 @@ En esta fase del proyecto el proyecto dispone de los siguientes metodos en el Se
 ## UML
 Se irá implementando la relación entre diferentes métodos y la interacción completa a su vez
 el funcionamiento completo de los métodos
-Ejempolo de funcionamiento de login:
-[![Ejemplo de login](https://i.postimg.cc/N08S3yd9/Ejemplo-de-login-drawio.jpg)]
+Ejempolo de funcionamiento de login de clave publica clave privada:
+![Ejemplo de login](https://user-images.githubusercontent.com/121645359/217804442-61fbdeb2-453c-449a-b390-5ab36c72cc33.png)
 ## Herramientas de desarrollo
 - Java 1.9
 - Kotlin
