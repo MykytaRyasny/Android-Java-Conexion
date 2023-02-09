@@ -1,13 +1,17 @@
 package program;
 
+import program.Claves.KeyGen;
 import program.socket.MultiConexion;
 
 import java.io.*;
 import java.net.*;
+import java.security.KeyPair;
 
 public class Main {
 
-    public static int numUser = 0;
+    public static int numConexion = 0;
+    public static KeyPair parDeClaves = KeyGen.generarClaves();
+
     public static void main(String[] args) {
         // Crear un socket en el puerto 5000
         try (ServerSocket serverSocket = new ServerSocket(5000)) {
@@ -15,7 +19,7 @@ public class Main {
             System.out.println("Servidor iniciado en el puerto 5000");
 
             while (true){
-                ++numUser;
+                ++numConexion;
                 Socket socket = serverSocket.accept();
                 ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
                 ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());

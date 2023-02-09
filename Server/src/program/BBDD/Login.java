@@ -30,7 +30,7 @@ public class Login extends User {
             if (result.next()) {
                 // Si hay un .next() es que existe y compramos contraseñas
                 String storedPassword = result.getString("password");
-                if (BCrypt.checkpw(password, storedPassword)) {
+                if (storedPassword.equals(password)) {
                     System.out.println("Usuario autenticado");
                 } else {
                     System.out.println("Contraseña incorrecta");
