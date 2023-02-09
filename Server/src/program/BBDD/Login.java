@@ -10,11 +10,16 @@ public class Login extends User {
         super(message);
     }
 
+    /**
+     * Trabaja con los datos transformandolos
+     * en cadenas separadas para comprobar con la base de datos
+     *
+     * @param datos datos que separa en diferentes Strings
+     */
     public void login(String datos) {
         String[] parts = datos.split(":");
         String username = parts[1];
         String password = parts[2];
-        System.out.println(password);
 
         // Conectarse a la base de datos SQLite
         Connection connection = null;
@@ -25,17 +30,18 @@ public class Login extends User {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE nickname = ?");
             statement.setString(1, username);
             ResultSet result = statement.executeQuery();
+            //String salt = program.BBDD.Salt.obtenerSalt(datos);
 
             // Comprobar si el usuario existe en la base de datos
             if (result.next()) {
                 // Si hay un .next() es que existe y compramos contraseñas
                 String storedPassword = result.getString("password");
-                if (storedPassword.equals(password)) {
+                if (BCrypt.checkpw(password, storedPassword)) {
                     System.out.println("Usuario autenticado");
                 } else {
                     System.out.println("Contraseña incorrecta");
                 }
-            // No existe por que .next() devuelve false
+                // No existe por que .next() devuelve false
             } else {
                 System.out.println("Usuario no encontrado");
             }

@@ -8,7 +8,16 @@ public class Salt extends User {
         super(message);
     }
 
-    public String salt(String datos) {
+    /**
+     * Funcion para cifrar texto plano con hash conocido
+     * para posteriormente comprarlo con los datos del cliente
+     *
+     * @param datos La cadena de la cual vamos a substraer el hash
+     * @return Nos devuelve el hash con el que se ha cifrado la cotraseña en
+     * formato de String
+     */
+
+    public static String obtenerSalt(String datos) {
         String[] parts = datos.split(":");
         String username = parts[1];
         String saltString = null;
