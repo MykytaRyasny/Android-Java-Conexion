@@ -1,4 +1,4 @@
-package program.Claves;
+package program.claves;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;

@@ -7,8 +7,8 @@ import java.net.Socket;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 
-import program.BBDD.*;
-import program.Claves.KeyGen;
+import program.bbdd.*;
+import program.claves.KeyGen;
 import program.Main;
 
 public class MultiConexion implements Runnable {
@@ -22,12 +22,20 @@ public class MultiConexion implements Runnable {
     private ObjectInputStream in;
     private ObjectOutputStream out;
 
+    /**
+     * Constructor para generar cada hilo con su propio flujo
+     *
+     * @param socket Se le pasa el socket con la conexion establecida
+     * @param in Se crea el flujo de entrada
+     * @param out Se crea el flujo de salida
+     */
     public MultiConexion(Socket socket, ObjectInputStream in, ObjectOutputStream out) {
         this.socket = socket;
         this.in = in;
         this.out = out;
     }
 
+    // Creamos el .start() del Thread por haber implementado runnable
     Thread t;
 
     public void start(){
@@ -36,31 +44,53 @@ public class MultiConexion implements Runnable {
             t.start();
         }
     }
+
+    /**
+     * El hilo que engloba todo_ el codigo que se ejecuta cada vez que alguien se conecta
+     * Obteniendo las clave publica y privada que ya se generaron con el inicio del server
+     */
     public void run() {
+        // Obtenemos las claves
         PublicKey clavePublica = Main.parDeClaves.getPublic();
         PrivateKey clavePrivada = Main.parDeClaves.getPrivate();
         try {
+            // Mandamos la publica
             out.writeObject(clavePublica);
             out.flush();
-            System.out.println("Se ha mandado la clave publica: " + clavePublica);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         while (true) {
             try {
                 byte [] mensajeCifrado =  (byte[])in.readObject();
-                System.out.println(mensajeCifrado);
                 String mensajeCliente = KeyGen.descifrar(mensajeCifrado, clavePrivada);
-                System.out.println("El mensaje del cliente: " + user + " " + mensajeCliente);
                 String[] menu = mensajeCliente.split(":");
                 switch (menu[0]) {
                     case "register":
                         Register r = new Register(mensajeCliente);
-                        r.register(mensajeCliente);
+                        try {
+                            r.register(mensajeCliente);
+                            out.writeObject(true);
+                            out.flush();
+                            System.out.println("El cliente se ha registrado");
+                        } catch (program.errores.registerError e) {
+                            out.writeObject(false);
+                            out.flush();
+                            System.out.println(e.getMessage());
+                        }
                         break;
                     case "login":
                         Login l = new Login(mensajeCliente);
-                        l.login(mensajeCliente);
+                        try {
+                            l.login(mensajeCliente);
+                            out.writeObject(true);
+                            out.flush();
+                            System.out.println("El cliente se ha logueado");
+                        } catch (program.errores.loginError e){
+                            out.writeObject(false);
+                            out.flush();
+                            System.out.println(e.getMessage());
+                        }
                         break;
                 }
             } catch (IOException e) {

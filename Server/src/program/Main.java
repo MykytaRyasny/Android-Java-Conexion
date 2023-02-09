@@ -1,6 +1,6 @@
 package program;
 
-import program.Claves.KeyGen;
+import program.claves.KeyGen;
 import program.socket.MultiConexion;
 
 import java.io.*;

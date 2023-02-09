@@ -1,6 +1,7 @@
-package program.BBDD;
+package program.bbdd;
 
 import org.mindrot.jbcrypt.BCrypt;
+import program.errores.loginError;
 
 import java.sql.*;
 
@@ -16,7 +17,7 @@ public class Login extends User {
      *
      * @param datos datos que separa en diferentes Strings
      */
-    public void login(String datos) {
+    public void login(String datos) throws loginError{
         String[] parts = datos.split(":");
         String username = parts[1];
         String password = parts[2];
@@ -39,15 +40,14 @@ public class Login extends User {
                 if (BCrypt.checkpw(password, storedPassword)) {
                     System.out.println("Usuario autenticado");
                 } else {
-                    System.out.println("Contraseña incorrecta");
+                    throw new loginError("Contraseña incorrecta");
                 }
                 // No existe por que .next() devuelve false
             } else {
-                System.out.println("Usuario no encontrado");
+                throw new loginError("Usuario no encontrado");
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Error de conexión con la base de datos");
         } finally {
             try {
                 if (connection != null) {

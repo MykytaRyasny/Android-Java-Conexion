@@ -1,6 +1,7 @@
-package program.BBDD;
+package program.bbdd;
 
 import org.mindrot.jbcrypt.BCrypt;
+import program.errores.registerError;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,7 +24,7 @@ public class Register extends User {
      *                Strings y guardarlo de forma encriptada en la BBDD
      */
 
-    public void register(String message) {
+    public void register(String message) throws registerError {
         // Descomponemos el mensaje para obtener los valores de nickname, name y password
         String[] parts = message.split(":");
         this.name = parts[1];
@@ -50,7 +51,11 @@ public class Register extends User {
             stmt.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            if(e.getMessage().contains("[SQLITE_CONSTRAINT_PRIMARYKEY]"))
+                throw new registerError("Ya existe este usuario", e);
+            else{
+                e.printStackTrace();
+            }
         } finally {
             // Importante cerrar todas las conexiones
             try {
