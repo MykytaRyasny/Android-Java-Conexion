@@ -18,5 +18,7 @@
     <string name="repeat_password">Repeat Password</string>
     <string name="password_mismatch">Las contraseñas no coinciden</string>
     <string name="ip_mismatch">Introduzca una IP correcta</string>
+    <string name="login_incorrect">Login incorrecto</string>
     <string name="ip">ip</string>
+    <string name="user_exists">Este usuario ya existe</string>
 </resources>

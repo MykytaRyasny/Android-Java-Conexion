@@ -13,10 +13,7 @@ import com.example.android_java.server.Conexion
 import com.example.android_java.server.Utiles
 import com.example.iotproyect.R
 import com.example.iotproyect.databinding.FragmentFirstBinding
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.util.*
 
 /**
@@ -24,64 +21,70 @@ import java.util.*
  */
 class FirstFragment : Fragment() {
 
-    private var _binding: FragmentFirstBinding? = null
-    private val binding get() = _binding!!
+  private var _binding: FragmentFirstBinding? = null
+  private val binding get() = _binding!!
 
-    // Declaramos todos los elementos de FirstFragment
-    private lateinit var bt_register: Button
-    private lateinit var bt_entrar: Button
-    private lateinit var con: Conexion
-    private lateinit var et_nickname: EditText
-    private lateinit var et_password: EditText
-    private lateinit var et_ip: EditText
+  // Declaramos todos los elementos de FirstFragment
+  private lateinit var bt_register: Button
+  private lateinit var bt_entrar: Button
+  private lateinit var con: Conexion
+  private lateinit var et_nickname: EditText
+  private lateinit var et_password: EditText
+  private lateinit var et_ip: EditText
 
-    override fun onCreateView(
+  override fun onCreateView(
 
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    inflater: LayoutInflater, container: ViewGroup?,
+    savedInstanceState: Bundle?
+  ): View? {
 
-        _binding = FragmentFirstBinding.inflate(inflater, container, false)
-        return binding.root
+    _binding = FragmentFirstBinding.inflate(inflater, container, false)
+    return binding.root
 
-    }
+  }
 
-    @OptIn(DelicateCoroutinesApi::class)
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+  @OptIn(DelicateCoroutinesApi::class)
+  override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    super.onViewCreated(view, savedInstanceState)
 
+    // Asociamos ese boton al de Registrarse para or al segundo Fragmen
+    bt_register = view.findViewById(R.id.bt_register)
+    bt_register.setOnClickListener { findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment) }
 
+    // Identificamos ambos campos de texto para sacar los datos y mandarlos al servidor
+    et_nickname = view.findViewById(R.id.et_nickname)
+    et_password = view.findViewById(R.id.et_password)
+    et_ip = view.findViewById(R.id.et_ip_login)
 
-        // Asociamos ese boton al de Registrarse para or al segundo Fragmen
-        bt_register = view.findViewById(R.id.bt_register)
-        bt_register.setOnClickListener { findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment) }
-
-        // Identificamos ambos campos de texto para sacar los datos y mandarlos al servidor
-        et_nickname = view.findViewById(R.id.et_nickname)
-        et_password = view.findViewById(R.id.et_password)
-        et_ip = view.findViewById(R.id.et_ip_login)
-
-        // usamos el boto de entrar con lambda para mandar el nich y la pass
-        bt_entrar = view.findViewById(R.id.bt_enter)
-        bt_entrar.setOnClickListener {
-            con = Conexion()
-            if (Utiles.validarIP(et_ip.text.toString())) {
-                GlobalScope.launch(Dispatchers.IO) {
-                    con.login(
-                        et_nickname.text.toString().lowercase(),
-                        et_password.text.toString(),
-                        et_ip.text.toString()
-                    )
-                }
+    // usamos el boto de entrar con lambda para mandar el nich y la pass
+    bt_entrar = view.findViewById(R.id.bt_enter)
+    bt_entrar.setOnClickListener {
+      con = Conexion()
+      if (Utiles.validarIP(et_ip.text.toString())) {
+        GlobalScope.launch(Dispatchers.IO) {
+          val result = con.login(
+            et_nickname.text.toString().lowercase(),
+            et_password.text.toString(),
+            et_ip.text.toString()
+          )
+          withContext(Dispatchers.Main) {
+            if (result) {
+              //TODO tercer fragment
             } else {
-                Toast.makeText(requireActivity(), R.string.ip_mismatch, Toast.LENGTH_LONG)
-                    .show()
+              Toast.makeText(requireActivity(), R.string.login_incorrect, Toast.LENGTH_LONG)
+                .show()
             }
+          }
         }
+      } else {
+        Toast.makeText(requireActivity(), R.string.ip_mismatch, Toast.LENGTH_LONG)
+          .show()
+      }
     }
+  }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+  override fun onDestroyView() {
+    super.onDestroyView()
+    _binding = null
+  }
 }
