@@ -1,22 +1,7 @@
-2023/02/10 12.27.56:Ya existe este usuario:192.168.100.183
-2023/02/10 12.32.21:registro:192.168.100.183
-2023/02/10 12.33.20:Ya existe este usuario:192.168.100.183
-2023/02/10 14.12.32:Ya existe este usuario:192.168.100.183
-2023/02/10 14.12.43:Ya existe este usuario:192.168.100.183
-2023/02/10 14.12.54:Ya existe este usuario:192.168.100.183
-2023/02/10 14.13.27:Ya existe este usuario:192.168.100.183
-2023/02/10 14.13.43:Ya existe este usuario:192.168.100.183
-2023/02/10 14.14.07:login:192.168.100.183
-2023/02/10 14.14.11:Desconexion inesperada EOFException:192.168.100.183
-2023/02/10 14.22.38:Ya existe este usuario:192.168.100.183
-2023/02/10 14.23.23:Ya existe este usuario:192.168.100.183
-2023/02/10 14.23.27:Ya existe este usuario:192.168.100.183
-2023/02/10 14.23.28:Ya existe este usuario:192.168.100.183
-2023/02/10 14.23.29:Ya existe este usuario:192.168.100.183
-2023/02/10 14.23.30:Ya existe este usuario:192.168.100.183
-2023/02/10 14.23.30:Ya existe este usuario:192.168.100.183
-2023/02/10 14.23.31:Ya existe este usuario:192.168.100.183
-2023/02/10 14.23.32:Ya existe este usuario:192.168.100.183
-2023/02/10 14.23.41:Ya existe este usuario:192.168.100.183
-2023/02/10 14.24.29:Ya existe este usuario:192.168.100.183
-2023/02/10 14.55.49:conexion closed:192.168.100.183
+2023/02/10 19.07.37:registro:192.168.100.183
+2023/02/10 19.08.23:login:192.168.100.183
+2023/02/10 19.08.41:desconectado:192.168.100.183
+2023/02/10 19.09.10:Ya existe este usuario:192.168.100.183
+2023/02/10 19.09.28:Contraseña incorrecta:192.168.100.183
+2023/02/10 19.11.39:login:192.168.100.183
+2023/02/10 19.11.46:Desconexion inesperada EOFException:192.168.100.183

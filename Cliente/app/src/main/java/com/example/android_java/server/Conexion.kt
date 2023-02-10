@@ -12,8 +12,9 @@ import java.security.Security
 // Clase con metodos para conectarse y desconectarse del servidor
 class Conexion() {
     companion object{
-        public lateinit var clavePublicaServer:PublicKey
+        lateinit var clavePublicaServer:PublicKey
     }
+
     private lateinit var socket: Socket
 
     private lateinit var output: ObjectOutputStream
@@ -71,12 +72,16 @@ class Conexion() {
     /**
      * Cerramos la conexion comprobando que esta inicializada
      */
-    fun desconectar() {
+    suspend fun desconectar() {
         if (::socket.isInitialized) {
+            val mensaje = "desconectar"
+            output.writeObject(Utiles.encriptar(mensaje))
+            output.flush()
+            output.close()
+            input.close()
             socket.close()
-            println("Conexión cerrada")
         } else {
-            println("No hay conexión para cerrar")
+            //Ignore
         }
     }
 }

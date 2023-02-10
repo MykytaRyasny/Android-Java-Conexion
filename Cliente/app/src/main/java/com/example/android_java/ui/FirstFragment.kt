@@ -2,9 +2,7 @@ package com.example.android_java.ui
 
 import android.app.ProgressDialog
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -20,7 +18,7 @@ import java.util.*
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class FirstFragment : Fragment() {
+class FirstFragment : Fragment(){
 
   private var _binding: FragmentFirstBinding? = null
   private val binding get() = _binding!!
@@ -28,10 +26,16 @@ class FirstFragment : Fragment() {
   // Declaramos todos los elementos de FirstFragment
   private lateinit var bt_register: Button
   private lateinit var bt_entrar: Button
-  private lateinit var con: Conexion
+
+  companion object {
+    lateinit var con: Conexion
+  }
+
   private lateinit var et_nickname: EditText
   private lateinit var et_password: EditText
   private lateinit var et_ip: EditText
+
+  private lateinit var desconectar: MenuItem
 
   override fun onCreateView(
 
@@ -74,6 +78,8 @@ class FirstFragment : Fragment() {
           withContext(Dispatchers.Main) {
             progressDialog.dismiss()
             if (result) {
+              (activity as MainActivity).habilitarDesconectar()
+              print("Me he logueado")
               //TODO tercer fragment
             } else {
               Toast.makeText(requireActivity(), R.string.login_incorrect, Toast.LENGTH_LONG)
@@ -87,6 +93,11 @@ class FirstFragment : Fragment() {
       }
     }
   }
+
+  /**
+   * Creamos un inflater de menu_main para opder trabajar con sus elementos
+   * Se pasa [Menu] el menu que queremos utilizar
+   */
 
   override fun onDestroyView() {
     super.onDestroyView()

@@ -10,11 +10,16 @@ import android.view.Menu
 import android.view.MenuItem
 import com.example.iotproyect.R
 import com.example.iotproyect.databinding.ActivityMainBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+
+    private lateinit var desconectar:MenuItem
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,15 +37,30 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
+        desconectar = menu.findItem(R.id.desconectar)
+        desconectar.isEnabled = false
+        desconectar.setOnMenuItemClickListener {
+            GlobalScope.launch(Dispatchers.IO) {
+                FirstFragment.con.desconectar()
+            }
+            desconectar.isEnabled = false
+            return@setOnMenuItemClickListener true
+        }
         return true
     }
 
+    /**
+     * Habilitamos nuestro boton de desconectar
+     */
+    fun habilitarDesconectar(){
+        desconectar.isEnabled = true
+    }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.desconectar -> true
             else -> super.onOptionsItemSelected(item)
         }
     }

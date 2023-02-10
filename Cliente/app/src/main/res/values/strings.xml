@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">iotproyect</string>
-    <string name="action_settings">Settings</string>
+    <string name="disconnect">Desconectar</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -21,5 +21,8 @@
     <string name="login_incorrect">Login incorrecto</string>
     <string name="ip">ip</string>
     <string name="user_exists">Este usuario ya existe</string>
-    <string name="connecting">Conectando...</string>
+    <string name="connecting">Conectando…</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
