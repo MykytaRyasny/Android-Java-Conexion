@@ -1,5 +1,6 @@
 package com.example.android_java.ui
 
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -56,11 +57,14 @@ class FirstFragment : Fragment() {
     et_password = view.findViewById(R.id.et_password)
     et_ip = view.findViewById(R.id.et_ip_login)
 
-    // usamos el boto de entrar con lambda para mandar el nich y la pass
+    // usamos el boton de entrar con lambda para mandar el nick y la pass
     bt_entrar = view.findViewById(R.id.bt_enter)
     bt_entrar.setOnClickListener {
       con = Conexion()
       if (Utiles.validarIP(et_ip.text.toString())) {
+        val progressDialog = ProgressDialog(requireActivity())
+        progressDialog.setMessage(getString(R.string.connecting))
+        progressDialog.show()
         GlobalScope.launch(Dispatchers.IO) {
           val result = con.login(
             et_nickname.text.toString().lowercase(),
@@ -68,6 +72,7 @@ class FirstFragment : Fragment() {
             et_ip.text.toString()
           )
           withContext(Dispatchers.Main) {
+            progressDialog.dismiss()
             if (result) {
               //TODO tercer fragment
             } else {

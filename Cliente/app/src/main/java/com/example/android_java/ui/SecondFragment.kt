@@ -1,5 +1,6 @@
 package com.example.android_java.ui
 
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -61,11 +62,14 @@ class SecondFragment : Fragment() {
 
     bt_Cancelar.setOnClickListener { findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment) }
     bt_Aceptar.setOnClickListener {
+      con = Conexion()
       if (et_Password.text.toString() != et_repeatPassword.text.toString()) {
         Toast.makeText(requireActivity(), R.string.password_mismatch, Toast.LENGTH_LONG)
           .show()
       } else if (Utiles.validarIP(et_ip.text.toString())) {
-        con = Conexion()
+        val progressDialog = ProgressDialog(requireActivity())
+        progressDialog.setMessage(getString(R.string.connecting))
+        progressDialog.show()
         GlobalScope.launch(Dispatchers.IO) {
           val result = con.register(
             et_Name.text.toString(),
@@ -74,6 +78,7 @@ class SecondFragment : Fragment() {
             et_ip.text.toString()
           )
           withContext(Dispatchers.Main) {
+            progressDialog.dismiss()
             if (result) {
               findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
             } else {

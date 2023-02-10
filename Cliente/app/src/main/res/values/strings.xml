@@ -21,4 +21,5 @@
     <string name="login_incorrect">Login incorrecto</string>
     <string name="ip">ip</string>
     <string name="user_exists">Este usuario ya existe</string>
+    <string name="connecting">Conectando...</string>
 </resources>
