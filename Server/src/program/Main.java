@@ -11,11 +11,15 @@ public class Main {
 
     public static int numConexion = 0;
     public static KeyPair parDeClaves = KeyGen.generarClaves();
+    public static File f;
 
     public static void main(String[] args) {
-        // Crear un socket en el puerto 5000
+                // Crear un socket en el puerto 5000
         try (ServerSocket serverSocket = new ServerSocket(5000)) {
-
+            f = new File("./log.txt");
+            if(!f.exists()){
+                f.createNewFile();
+            }
             System.out.println("Servidor iniciado en el puerto 5000");
 
             while (true){

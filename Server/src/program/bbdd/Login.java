@@ -31,7 +31,6 @@ public class Login extends User {
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE nickname = ?");
             statement.setString(1, username);
             ResultSet result = statement.executeQuery();
-            //String salt = program.BBDD.Salt.obtenerSalt(datos);
 
             // Comprobar si el usuario existe en la base de datos
             if (result.next()) {
