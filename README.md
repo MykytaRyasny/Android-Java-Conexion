@@ -1,3 +1,14 @@
+# Nuevo o actualizado
+- Pulido toda la conexion
+- Limitado el giro de pantalla
+- Añadido nuevo fragment
+- El boton de atrás tiene un comportamiento diferente segun el fragment
+- Nuevas corrutinas
+- Log en el servidor
+- Tratamiento de excepciones en el servidor personalizado
+- JavaDoc para el Server
+## BBDD
+La bese de datos que se incluye en el release esta vacia, para probar hace falta registrarse
 # Como usar el proyecto
 ## Compilado
 - Para usar el proyecto compilado hay que descargar la apk e instalarlo en un movil
@@ -8,7 +19,6 @@
 - tener el archivo de la base de datos en el mismo directorio que el servidor
 - Tanto el servidor como el dispositivo movil tiene que estar en la misma red
   Ya puedes registrarte y loguearte
-
 ## Sin compilar
 - Necesitas AndroidStudio y Cualquier IDE a elección (Eclipse, VSCode, IntelliJ)
 - Java 1.8 o superior
