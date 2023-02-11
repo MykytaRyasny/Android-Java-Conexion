@@ -8,6 +8,9 @@ import java.security.*;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
+/**
+ * Clase que nos permite generar par de claves
+ */
 public class KeyGen {
     /**
      * Genera una clave pública y privada

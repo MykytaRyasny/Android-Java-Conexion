@@ -1,6 +1,10 @@
 package program.errores;
 
+/**
+ * Clase personalizada para lanzar excepciones en el login
+ */
 public class loginError extends Exception {
+
     private String mensajeError;
 
     /**
