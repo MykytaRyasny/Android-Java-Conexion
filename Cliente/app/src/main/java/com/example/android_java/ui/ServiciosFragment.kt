@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -32,6 +33,9 @@ class ServiciosFragment : Fragment() {
   private var param1: String? = null
   private var param2: String? = null
 
+  private lateinit var btSalir:Button
+  private lateinit var btImagenes:Button
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
@@ -56,6 +60,17 @@ class ServiciosFragment : Fragment() {
         }
       }
     }
+    btImagenes = view.findViewById(R.id.btVisorDeImagenes)
+    btSalir = view.findViewById(R.id.btSalir)
+    btSalir.setOnClickListener {
+      GlobalScope.launch(Dispatchers.IO) {
+        FirstFragment.con.desconectar()
+        withContext(Dispatchers.Main) {
+          findNavController().navigate(R.id.action_serviciosFragment_to_FirstFragment)
+        }
+      }
+    }
+
   }
 
   override fun onCreateView(
@@ -64,6 +79,7 @@ class ServiciosFragment : Fragment() {
   ): View? {
     // Inflate the layout for this fragment
     return inflater.inflate(R.layout.fragment_servicios, container, false)
+
   }
 
   companion object {

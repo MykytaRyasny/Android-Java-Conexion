@@ -54,6 +54,18 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    override fun onBackPressed() {
+        /**
+         * Hacemos que si estamos en FirstFragment que la app se cierre en vez de volver
+         * a cualquier otro Fragment
+         */
+        if (javaClass.simpleName == FirstFragment::class.java.name) {
+            finish()
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     /**
      * Habilitamos nuestro boton de desconectar
      */

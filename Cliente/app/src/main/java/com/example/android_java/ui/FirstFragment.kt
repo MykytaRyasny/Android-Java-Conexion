@@ -6,6 +6,7 @@ import android.view.*
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.android_java.server.Conexion
@@ -18,7 +19,7 @@ import java.util.*
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class FirstFragment : Fragment(){
+class FirstFragment : Fragment() {
 
   private var _binding: FragmentFirstBinding? = null
   private val binding get() = _binding!!
@@ -92,7 +93,6 @@ class FirstFragment : Fragment(){
       }
     }
   }
-
   /**
    * Creamos un inflater de menu_main para opder trabajar con sus elementos
    * Se pasa [Menu] el menu que queremos utilizar
