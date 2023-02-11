@@ -1,4 +1,4 @@
-# Nuevo o actualizado
+# Nuevo Release
 - Pulido toda la conexion
 - Limitado el giro de pantalla
 - Añadido nuevo fragment
