@@ -14,6 +14,9 @@
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
             app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/action_FirstFragment_to_serviciosFragment"
+            app:destination="@id/serviciosFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -25,4 +28,16 @@
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/serviciosFragment"
+        android:name="com.example.android_java.ui.ServiciosFragment"
+        android:label="fragment_servicios"
+        tools:layout="@layout/fragment_servicios">
+        <action
+            android:id="@+id/action_serviciosFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+    </fragment>
+    <action
+        android:id="@+id/global_FirstFragment"
+        app:destination="@id/FirstFragment" />
 </navigation>

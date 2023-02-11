@@ -37,13 +37,12 @@
         android:id="@+id/bt_Cancelar"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:text="@android:string/cancel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.571"
-        app:layout_constraintStart_toStartOf="@+id/et_Password"
+        app:layout_constraintStart_toEndOf="@+id/bt_Aceptar"
         app:layout_constraintTop_toBottomOf="@+id/et_repeatPassword" />
 
     <Button
@@ -52,10 +51,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="100dp"
+        android:layout_marginEnd="24dp"
         android:text="@string/aceptar"
-        app:layout_constraintEnd_toEndOf="@+id/et_Password"
-        app:layout_constraintHorizontal_bias="0.561"
+        app:layout_constraintEnd_toStartOf="@+id/bt_Cancelar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_repeatPassword" />
 

@@ -82,13 +82,13 @@ class SecondFragment : Fragment() {
             if (result) {
               findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
             } else {
-              Toast.makeText(requireActivity(), R.string.user_exists, Toast.LENGTH_LONG)
+              Toast.makeText(requireActivity(), R.string.user_exists, Toast.LENGTH_SHORT)
                 .show()
             }
           }
         }
       } else {
-        Toast.makeText(requireActivity(), R.string.ip_mismatch, Toast.LENGTH_LONG)
+        Toast.makeText(requireActivity(), R.string.ip_mismatch, Toast.LENGTH_SHORT)
           .show()
       }
 

@@ -25,7 +25,7 @@ El proyecto consiste en una aplicacion cliente servidor que inician el contacto 
 - [x] El servidor devuelve True/False paras las operacioens de login/register
 - [x] Cambiando el sistema de Cifrado a RSA (Clave publcia/Privada)
 - [x] Encriptado manual de la Base de datos con BCrypt 
-Primera entrega
+### Primera entrega
 - [x] Impllementacio inciial de hilos
 - [x] Almcenamiento local de la semilla de encriptacion
 - [x] Implementados hilos en el servidor para los metodos login y register

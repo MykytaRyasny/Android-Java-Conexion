@@ -1,13 +1,16 @@
 package com.example.android_java.server
 
+import androidx.navigation.Navigation
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import com.example.iotproyect.R
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.io.IOException
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 import java.net.Socket
 import java.security.PublicKey
-import javax.crypto.Cipher
-import org.bouncycastle.jce.provider.BouncyCastleProvider
-import java.security.Security
 
 // Clase con metodos para conectarse y desconectarse del servidor
 class Conexion() {
@@ -73,14 +76,14 @@ class Conexion() {
      * Cerramos la conexion comprobando que esta inicializada
      */
     suspend fun desconectar() {
-        if (::socket.isInitialized) {
+        if (!socket.isClosed) {
             val mensaje = "desconectar"
             output.writeObject(Utiles.encriptar(mensaje))
             output.flush()
             output.close()
             input.close()
             socket.close()
-        } else {
+         } else {
             //Ignore
         }
     }

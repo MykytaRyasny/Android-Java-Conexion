@@ -79,16 +79,15 @@ class FirstFragment : Fragment(){
             progressDialog.dismiss()
             if (result) {
               (activity as MainActivity).habilitarDesconectar()
-              print("Me he logueado")
-              //TODO tercer fragment
+              findNavController().navigate(R.id.action_FirstFragment_to_serviciosFragment)
             } else {
-              Toast.makeText(requireActivity(), R.string.login_incorrect, Toast.LENGTH_LONG)
+              Toast.makeText(requireActivity(), R.string.login_incorrect, Toast.LENGTH_SHORT)
                 .show()
             }
           }
         }
       } else {
-        Toast.makeText(requireActivity(), R.string.ip_mismatch, Toast.LENGTH_LONG)
+        Toast.makeText(requireActivity(), R.string.ip_mismatch, Toast.LENGTH_SHORT)
           .show()
       }
     }
