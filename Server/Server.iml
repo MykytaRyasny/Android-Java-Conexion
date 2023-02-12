@@ -7,8 +7,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="jbcrypt-0.4" level="project" />
-    <orderEntry type="library" name="sqlite-jdbc-3.40.0.0" level="project" />
-    <orderEntry type="library" name="bcprov-jdk15on-1.70" level="project" />
+    <orderEntry type="library" exported="" name="jbcrypt-0.4" level="application" />
+    <orderEntry type="library" exported="" name="sqlite-jdbc-3.40.0.0" level="application" />
+    <orderEntry type="library" exported="" name="lib" level="project" />
   </component>
 </module>

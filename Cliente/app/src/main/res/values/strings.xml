@@ -15,10 +15,13 @@
     <string name="aceptar">Aceptar</string>
     <string name="repeat_password">Repeat Password</string>
     <string name="password_mismatch">Las contraseñas no coinciden</string>
+    <string name="password_empty">Debes de introducir una cotnraseña</string>
     <string name="ip_mismatch">Introduzca una IP correcta</string>
     <string name="login_incorrect">Login incorrecto</string>
     <string name="ip">ip</string>
     <string name="user_exists">Este usuario ya existe</string>
+    <string name="conexion_fail">Fallo en la conexion</string>
+    <string name="empty_tb">Debes rellenar todos los campos</string>
     <string name="connecting">Conectando…</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

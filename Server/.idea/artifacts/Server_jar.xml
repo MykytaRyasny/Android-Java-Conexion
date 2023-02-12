@@ -1,11 +1,9 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="Server:jar">
-    <output-path>$PROJECT_DIR$/../releases/release</output-path>
+  <artifact type="jar" build-on-make="true" name="Server:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Server_jar</output-path>
     <root id="archive" name="Server.jar">
       <element id="module-output" name="Server" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/resources/jbcrypt-0.4.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/resources/bcprov-jdk15on-1.70.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/resources/sqlite-jdbc-3.40.0.0.jar" path-in-jar="/" />
+      <element id="library" level="project" name="lib" />
     </root>
   </artifact>
 </component>

@@ -18,6 +18,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.net.ConnectException
+import java.net.SocketException
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -40,8 +42,7 @@ class SecondFragment : Fragment() {
   private val binding get() = _binding!!
 
   override fun onCreateView(
-    inflater: LayoutInflater, container: ViewGroup?,
-    savedInstanceState: Bundle?
+    inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
   ): View? {
 
     _binding = FragmentSecondBinding.inflate(inflater, container, false)
@@ -63,35 +64,42 @@ class SecondFragment : Fragment() {
     bt_Cancelar.setOnClickListener { findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment) }
     bt_Aceptar.setOnClickListener {
       con = Conexion()
-      if (et_Password.text.toString() != et_repeatPassword.text.toString()) {
-        Toast.makeText(requireActivity(), R.string.password_mismatch, Toast.LENGTH_LONG)
-          .show()
-      } else if (Utiles.validarIP(et_ip.text.toString())) {
+      if (!Utiles.validarIP(et_ip.text.toString())) {
+        Toast.makeText(requireActivity(), R.string.ip_mismatch, Toast.LENGTH_SHORT).show()
+      } else if (et_Password.text.toString().equals("")) {
+        Toast.makeText(requireActivity(), R.string.password_empty, Toast.LENGTH_SHORT).show()
+      } else if (et_Password.text.toString() != et_repeatPassword.text.toString()) {
+        Toast.makeText(requireActivity(), R.string.password_mismatch, Toast.LENGTH_SHORT).show()
+      } else if (et_Name.text.equals("") || et_Nickname.text.equals("")) {
+        Toast.makeText(requireActivity(), R.string.empty_tb, Toast.LENGTH_SHORT).show()
+      } else {
         val progressDialog = ProgressDialog(requireActivity())
         progressDialog.setMessage(getString(R.string.connecting))
         progressDialog.show()
         GlobalScope.launch(Dispatchers.IO) {
-          val result = con.register(
-            et_Name.text.toString(),
-            et_Nickname.text.toString().lowercase(),
-            et_Password.text.toString(),
-            et_ip.text.toString()
-          )
-          withContext(Dispatchers.Main) {
-            progressDialog.dismiss()
-            if (result) {
-              findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
-            } else {
-              Toast.makeText(requireActivity(), R.string.user_exists, Toast.LENGTH_SHORT)
-                .show()
+          try {
+            val result = con.register(
+              et_Name.text.toString(),
+              et_Nickname.text.toString().lowercase(),
+              et_Password.text.toString(),
+              et_ip.text.toString()
+            )
+            withContext(Dispatchers.Main) {
+              progressDialog.dismiss()
+              if (result) {
+                findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
+              } else {
+                Toast.makeText(requireActivity(), R.string.user_exists, Toast.LENGTH_SHORT).show()
+              }
+            }
+          } catch (e: Exception) {
+            withContext(Dispatchers.Main) {
+              progressDialog.dismiss()
+              Toast.makeText(requireActivity(), R.string.conexion_fail, Toast.LENGTH_SHORT).show()
             }
           }
         }
-      } else {
-        Toast.makeText(requireActivity(), R.string.ip_mismatch, Toast.LENGTH_SHORT)
-          .show()
       }
-
     }
   }
 
