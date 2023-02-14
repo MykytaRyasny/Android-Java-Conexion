@@ -131,7 +131,7 @@ public class MultiConexion implements Runnable {
   public synchronized void log(String log, Socket socket) throws IOException {
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH.mm.ss");
     LocalDateTime now = LocalDateTime.now();
-    String escribirFile = dtf.format(LocalDateTime.now()) + ":" + log + ":" + socket.getLocalAddress().getHostAddress() + "\n";
+    String escribirFile = dtf.format(LocalDateTime.now()) + ":" + log + ":" + socket.getInetAddress().getHostAddress() + "\n";
     Path p = Path.of(Main.f.toURI());
     Files.writeString(p, escribirFile, StandardOpenOption.APPEND);
   }

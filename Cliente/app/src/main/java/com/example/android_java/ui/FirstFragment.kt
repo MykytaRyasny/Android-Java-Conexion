@@ -71,19 +71,26 @@ class FirstFragment : Fragment() {
         progressDialog.setMessage(getString(R.string.connecting))
         progressDialog.show()
         GlobalScope.launch(Dispatchers.IO) {
-          val result = con.login(
-            et_nickname.text.toString().lowercase(),
-            et_password.text.toString(),
-            et_ip.text.toString()
-          )
-          withContext(Dispatchers.Main) {
-            progressDialog.dismiss()
-            if (result) {
-              (activity as MainActivity).habilitarDesconectar()
-              findNavController().navigate(R.id.action_FirstFragment_to_serviciosFragment)
-            } else {
-              Toast.makeText(requireActivity(), R.string.login_incorrect, Toast.LENGTH_SHORT)
-                .show()
+          try {
+            val result = con.login(
+              et_nickname.text.toString().lowercase(),
+              et_password.text.toString(),
+              et_ip.text.toString()
+            )
+            withContext(Dispatchers.Main) {
+              progressDialog.dismiss()
+              if (result) {
+                (activity as MainActivity).habilitarDesconectar()
+                findNavController().navigate(R.id.action_FirstFragment_to_serviciosFragment)
+              } else {
+                Toast.makeText(requireActivity(), R.string.login_incorrect, Toast.LENGTH_SHORT)
+                  .show()
+              }
+            }
+          } catch (e: Exception) {
+            withContext(Dispatchers.Main) {
+              progressDialog.dismiss()
+              Toast.makeText(requireActivity(), R.string.conexion_fail, Toast.LENGTH_SHORT).show()
             }
           }
         }
