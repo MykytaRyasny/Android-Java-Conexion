@@ -46,27 +46,33 @@ public class MultiConexion implements Runnable {
           case "login":
             login(mensajeCliente);
             break;
+          case "imagenes":
+            recibirImagen(menu);
+            log("Transferencia completada", this.socket);
+            break;
           case "desconectar":
-            cerrarConexiones();
+            cerrarConexiones(this.socket);
             break;
         }
       } catch (SocketException e) {
         try {
           log("conexion closed", this.socket);
-          detenerHilo();
+          cerrarConexiones(this.socket);
         } catch (IOException ex) {
           throw new RuntimeException(ex);
         }
       } catch (EOFException e) {
         try {
           log("Desconexion inesperada EOFException", this.socket);
-          detenerHilo();
+          cerrarConexiones(this.socket);
         } catch (IOException ex) {
           throw new RuntimeException(ex);
         }
       } catch (IOException e) {
         try {
+          e.printStackTrace();
           log("Desconexion inesperada IOException", this.socket);
+          cerrarConexiones(this.socket);
         } catch (IOException ex) {
           throw new RuntimeException(ex);
         }
@@ -76,13 +82,40 @@ public class MultiConexion implements Runnable {
     }
   }
   
+  private void recibirImagen(String[] menu) throws IOException {
+    DataInputStream dataIn = new DataInputStream(in);
+    FileOutputStream fileOut;
+    int numero = Integer.parseInt(menu[1]);
+    File f = new File("./imagenes");
+    if (!f.exists()) {
+      f.mkdirs();
+    }
+    for (int i = 1; i <= numero; i++) {
+      int size = dataIn.readInt();
+      byte[] byteArray = new byte[size];
+      int offset = 0;
+      while (offset < size) {
+        int bytesRead = dataIn.read(byteArray, offset, size - offset);
+        if (bytesRead == -1) {
+          throw new IOException("El flujo de entrada se ha cerrado de forma inesperada");
+        }
+        offset += bytesRead;
+      }
+      String fileName = "./imagenes/" + nombrarImagen() + ".png";
+      fileOut = new FileOutputStream(fileName);
+      fileOut.write(byteArray);
+      fileOut.close();
+    }
+    System.out.println("Se han recibido  " + numero + " imágene/s de " + this.socket.getInetAddress().getHostAddress());
+  }
+  
   /**
    * Cerramos el socket a peticion de usuario para que no se produzca EOFException
    * Tanto Cliente como servidor cierran socket y los input y output
    * @throws IOException
    */
-  private void cerrarConexiones() throws IOException {
-    log("desconectado", this.socket);
+  private void cerrarConexiones(Socket socket) throws IOException {
+    log("desconectado", socket);
     detenerHilo();
   }
   
@@ -118,6 +151,11 @@ public class MultiConexion implements Runnable {
     this.in = in;
     this.out = out;
   }
+  public String nombrarImagen(){
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yy.MM.dd.HH.mm.ss.SS");
+    LocalDateTime now = LocalDateTime.now();
+    return dtf.format(LocalDateTime.now())+this.socket.getInetAddress().getHostAddress();
+  }
   
   /**
    * Metodo syncronizado para escribir el log
@@ -131,7 +169,8 @@ public class MultiConexion implements Runnable {
   public synchronized void log(String log, Socket socket) throws IOException {
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH.mm.ss");
     LocalDateTime now = LocalDateTime.now();
-    String escribirFile = dtf.format(LocalDateTime.now()) + ":" + log + ":" + socket.getInetAddress().getHostAddress() + "\n";
+    String escribirFile = dtf.format(LocalDateTime.now()) + ":" + log + ":" + socket.getInetAddress().getHostAddress();
+    System.out.println(escribirFile);
     Path p = Path.of(Main.f.toURI());
     Files.writeString(p, escribirFile, StandardOpenOption.APPEND);
   }
@@ -145,7 +184,7 @@ public class MultiConexion implements Runnable {
     detener = true;
     in.close();
     out.close();
-    System.out.println("Cerramos todas las conexiones");
+    System.out.println("Cerramos todas las conexiones con " + this.socket.getInetAddress().getHostAddress());
   }
   
   /**
@@ -178,9 +217,6 @@ public class MultiConexion implements Runnable {
       t.start();
     }
   }
-  // Creamos una variable User a la que posteriormente le asignaremos el numero segun el contador
-  // de usuarios. Que mas que numero de usuario es numero de conexion
-  private int user = Main.numConexion;
   // Declaramos las variables que vamos a usar en nuestras conexiones
   private Socket socket;
   // Creamos nuestro input y output con el que nos comunicaremos con el cliente

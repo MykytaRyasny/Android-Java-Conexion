@@ -1,9 +1,21 @@
 package com.example.android_java.server
 
+import android.content.ContentUris
+import android.content.Context
+import android.database.Cursor
+import android.net.Uri
+import android.os.Build
+import android.os.Environment
+import android.provider.DocumentsContract
+import android.provider.MediaStore
 import org.bouncycastle.jce.provider.BouncyCastleProvider
+import java.io.DataOutputStream
+import java.io.File
+import java.io.InputStream
 import java.security.Security
 import java.util.regex.Pattern
 import javax.crypto.Cipher
+
 
 // Aqui voy a implementar un validador de IP y obtener la semilla de la pass
 class Utiles {
@@ -29,7 +41,24 @@ class Utiles {
       println(test)
       return test
     }
-  }
 
+
+    suspend fun mandarImagen(byteArrayList: MutableList<ByteArray>) {
+
+      val out = Conexion.output
+      val dout = DataOutputStream(out)
+
+      var numero = byteArrayList.size
+      var mensaje = "imagenes:${numero}"
+      out.writeObject(encriptar(mensaje))
+      out.flush()
+
+      for (byteArray in byteArrayList) {
+        dout.writeInt(byteArray.size)
+        dout.write(byteArray)
+        dout.flush()
+      }
+    }
+  }
 
 }

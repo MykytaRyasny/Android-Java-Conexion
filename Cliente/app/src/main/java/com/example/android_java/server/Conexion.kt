@@ -17,12 +17,11 @@ import java.security.PublicKey
 class Conexion() {
   companion object {
     lateinit var clavePublicaServer: PublicKey
+    lateinit var output: ObjectOutputStream
+    lateinit var input: ObjectInputStream
   }
 
   private lateinit var socket: Socket
-
-  private lateinit var output: ObjectOutputStream
-  private lateinit var input: ObjectInputStream
 
   /**
    * Se intenta conectar a la ip [String] dado
