@@ -13,6 +13,7 @@ La bese de datos que se incluye en el release esta vacia, para probar hace falta
 ## Compilado
 - Para usar el proyecto compilado hay que descargar la apk e instalarlo en un movil
 - Descargar el servidor en un dispositivo que tenga java 1.8 o superior
+- El servidor viene en una carpeta con librerias necesarias para funcionar asi como la BBDD, no moverlo de sitio para su correcto funcionamiento
 - Ejecutar el servidor con comando:
   <br />
   `java -jar Server.jar`
